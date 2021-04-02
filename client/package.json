@@ -1,0 +1,27 @@
+{
+  "name": "tinfoilbots",
+  "version": "0.0.1",
+  "description": "A Twitch bot for tinfoilcats's channel.",
+  "main": "src",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ."
+  },
+  "author": "Tin",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "babel-core": "^6.26.3",
+    "config": "^3.3.6",
+    "dotenv": "^8.2.0",
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.19",
+    "node-fetch": "^2.6.1",
+    "tmi.js": "^1.7.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "proxy": "http://localhost:5000"
+}

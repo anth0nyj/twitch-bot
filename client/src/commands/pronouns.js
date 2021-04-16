@@ -57,23 +57,25 @@ const pronouns = async (message, client, userstate, channel) => {
   if(args[0].toLowerCase() === '!pronouns') {
     
     let target = '';
-    if(!args[1] || args[1] === 'set' || args[1] === 'edit' || args[1] === 'remove' || args[1] === 'delete') {
+    if(!args[1] || args[1].toLowerCase() === 'set' || args[1].toLowerCase() === 'edit' || args[1].toLowerCase() === 'remove' || args[1].toLowerCase() === 'delete') {
       target = userstate.username;
     } else if(args[1].match(/^@\S+/)) {
       target = args[1].slice(1);
+    } else if(args[1]) {
+      target = args[1];
     }
     
     let replyData = {};
 
-    if(args[1] && args[1] === 'set') {
-      replyData = await setPronouns(userstate.username, args);
+    if(args[1] && (args[1] === 'set' || args[1] === 'edit')) {
+      replyData = await setPronouns(userstate.username.toLowerCase(), args);
     } else if(args[1] && (args[1] === 'remove' || args[1] === 'delete')) {
-      replyData = await deletePronouns(target);
+      replyData = await deletePronouns(target.toLowerCase());
     } else {
-      replyData = await getPronouns();
+      replyData = await getPronouns(target.toLowerCase());
     }
     if(replyData) {
-      client.say(channel, `${replyData.username}'s preferred pronouns are ${replyData.pronouns}.`);
+      client.say(channel, `${target}'s preferred pronouns are ${replyData.pronouns}.`);
     } else {
       client.say(channel, `${target} does not have their preferred pronouns set. They can do so by entering '!pronouns set [pronouns]'.`);
     }
